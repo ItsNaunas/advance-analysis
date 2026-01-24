@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Delivery Dashboard - FFSmart{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Delivery Person Dashboard</h1>
+</div>
+
+<div class="dashboard-section">
+    <h2>My Deliveries</h2>
+    
+    {% if deliveries %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Delivery ID</th>
+                    <th>Scheduled Date</th>
+                    <th>Status</th>
+                    <th>Items</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in deliveries %}
+                <tr>
+                    <td>#{{ delivery.id }}</td>
+                    <td>{{ delivery.scheduled_date.strftime('%Y-%m-%d') if delivery.scheduled_date else 'N/A' }}</td>
+                    <td>
+                        <span class="badge badge-{{ 'success' if delivery.status == 'COMPLETED' else 'warning' }}">
+                            {{ delivery.status }}
+                        </span>
+                    </td>
+                    <td>{{ delivery.items|length }} items</td>
+                    <td>
+                        <a href="{{ url_for('delivery.detail', delivery_id=delivery.id) }}" 
+                           class="btn btn-sm btn-primary">View</a>
+                        {% if delivery.status != 'COMPLETED' %}
+                            <form method="POST" action="{{ url_for('delivery.confirm', delivery_id=delivery.id) }}" 
+                                  style="display: inline;">
+                                <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No deliveries scheduled.</p>
+    {% endif %}
+</div>
+
+<div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <button onclick="requestDoorAccess()" class="btn btn-primary">Request Rear Door Access</button>
+</div>
+
+<script>
+function requestDoorAccess() {
+    fetch('{{ url_for("delivery.request_access") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.access_granted) {
+            alert('Rear door access granted!');
+        } else {
+            alert('Access denied.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error requesting access.');
+    });
+}
+</script>
+{% endblock %}

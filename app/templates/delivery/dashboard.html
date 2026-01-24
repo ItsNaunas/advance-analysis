@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Delivery Dashboard - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Delivery Management</h1>
+</div>
+
+<div class="delivery-table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Delivery ID</th>
+                <th>Delivery Person</th>
+                <th>Scheduled Date</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in deliveries %}
+            <tr>
+                <td>#{{ delivery.id }}</td>
+                <td>{{ delivery.delivery_person.username if delivery.delivery_person else 'N/A' }}</td>
+                <td>{{ delivery.scheduled_date.strftime('%Y-%m-%d') if delivery.scheduled_date else 'N/A' }}</td>
+                <td>
+                    <span class="badge badge-{{ 'success' if delivery.status == 'COMPLETED' else 'warning' }}">
+                        {{ delivery.status }}
+                    </span>
+                </td>
+                <td>{{ delivery.items|length }} items</td>
+                <td>
+                    <a href="{{ url_for('delivery.detail', delivery_id=delivery.id) }}" 
+                       class="btn btn-sm btn-primary">View</a>
+                    {% if delivery.status != 'COMPLETED' and (current_user.role == 'DELIVERY_PERSON' or current_user.role in ['HEAD_CHEF', 'ADMIN']) %}
+                        <form method="POST" action="{{ url_for('delivery.confirm', delivery_id=delivery.id) }}" 
+                              style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No deliveries found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

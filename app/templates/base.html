@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FFSmart - Smart Fridge Inventory Management{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ url_for('dashboard.index') }}">FFSmart</a>
+            </div>
+            <div class="nav-menu">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('dashboard.index') }}" class="nav-link">Dashboard</a>
+                    <a href="{{ url_for('inventory.list') }}" class="nav-link">Inventory</a>
+                    
+                    {% if current_user.role in ['HEAD_CHEF', 'ADMIN'] %}
+                        <a href="{{ url_for('reorder.list') }}" class="nav-link">Reorders</a>
+                    {% endif %}
+                    
+                    {% if current_user.role == 'DELIVERY_PERSON' %}
+                        <a href="{{ url_for('delivery.list') }}" class="nav-link">Deliveries</a>
+                    {% endif %}
+                    
+                    <a href="{{ url_for('notification.list') }}" class="nav-link">
+                        Notifications
+                        <span id="unread-count" class="badge"></span>
+                    </a>
+                    
+                    {% if current_user.role == 'ADMIN' %}
+                        <a href="{{ url_for('admin.users') }}" class="nav-link">Admin</a>
+                    {% endif %}
+                    
+                    <div class="nav-user">
+                        <span class="user-name">{{ current_user.username }}</span>
+                        <span class="user-role">({{ current_user.role.replace('_', ' ') }})</span>
+                        <form method="POST" action="{{ url_for('auth.logout') }}" style="display: inline;">
+                            <button type="submit" class="btn-logout">Logout</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                            <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 FFSmart - Smart Fridge Inventory Management System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% if current_user.is_authenticated %}
+        <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+    {% endif %}
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

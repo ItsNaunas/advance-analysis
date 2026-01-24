@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Logs - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Audit Logs</h1>
+    <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">Back to Admin</a>
+</div>
+
+<div class="audit-logs-container">
+    <p>Total Logs: {{ total_count }}</p>
+    
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Entity Type</th>
+                <th>Entity ID</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') if log.timestamp else 'N/A' }}</td>
+                <td>{{ log.user.username if log.user else 'System' }}</td>
+                <td>{{ log.action }}</td>
+                <td>{{ log.entity_type }}</td>
+                <td>{{ log.entity_id or 'N/A' }}</td>
+                <td>
+                    {% if log.details_dict %}
+                        <small>{{ log.details_dict|tojson }}</small>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No audit logs found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if page > 1 %}
+        <a href="{{ url_for('admin.audit_logs', page=page-1) }}" class="btn btn-secondary">Previous</a>
+    {% endif %}
+    {% if logs|length == 50 %}
+        <a href="{{ url_for('admin.audit_logs', page=page+1) }}" class="btn btn-secondary">Next</a>
+    {% endif %}
+</div>
+{% endblock %}

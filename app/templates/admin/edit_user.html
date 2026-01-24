@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Edit User - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Edit User: {{ user.username }}</h1>
+    <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">Back to Users</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('admin.edit_user', user_id=user.id) }}" class="form">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" value="{{ user.username }}" disabled>
+            <small>Username cannot be changed</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="role">Role *</label>
+            <select id="role" name="role" required>
+                <option value="HEAD_CHEF" {% if user.role == 'HEAD_CHEF' %}selected{% endif %}>Head Chef</option>
+                <option value="CHEF" {% if user.role == 'CHEF' %}selected{% endif %}>Chef</option>
+                <option value="DELIVERY_PERSON" {% if user.role == 'DELIVERY_PERSON' %}selected{% endif %}>Delivery Person</option>
+                <option value="ADMIN" {% if user.role == 'ADMIN' %}selected{% endif %}>Admin</option>
+                <option value="HEALTH_SAFETY_OFFICER" {% if user.role == 'HEALTH_SAFETY_OFFICER' %}selected{% endif %}>Health & Safety Officer</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="new_password">New Password (leave blank to keep current)</label>
+            <input type="password" id="new_password" name="new_password" minlength="6">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update User</button>
+            <a href="{{ url_for('admin.users') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

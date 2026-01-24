@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Head Chef Dashboard - FFSmart{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Head Chef Dashboard</h1>
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-value">{{ all_items|length }}</div>
+            <div class="stat-label">Total Items</div>
+        </div>
+        <div class="stat-card stat-warning">
+            <div class="stat-value">{{ expiring_items|length }}</div>
+            <div class="stat-label">Expiring Soon</div>
+        </div>
+        <div class="stat-card stat-danger">
+            <div class="stat-value">{{ low_stock_items|length }}</div>
+            <div class="stat-label">Low Stock</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ pending_reorders|length }}</div>
+            <div class="stat-label">Pending Reorders</div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <div class="dashboard-section">
+        <h2>Expiring Items (Next 3 Days)</h2>
+        {% if expiring_items %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Expires</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in expiring_items %}
+                    <tr class="expiring-soon">
+                        <td>{{ item.item_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.expiration_date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ item.supplier.name if item.supplier else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No items expiring in the next 3 days.</p>
+        {% endif %}
+    </div>
+
+    <div class="dashboard-section">
+        <h2>Low Stock Items</h2>
+        {% if low_stock_items %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in low_stock_items %}
+                    <tr class="low-stock">
+                        <td>{{ item.item_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.supplier.name if item.supplier else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No low stock items.</p>
+        {% endif %}
+    </div>
+
+    <div class="dashboard-section">
+        <h2>Pending Reorders</h2>
+        {% if pending_reorders %}
+            <ul class="reorder-list">
+                {% for reorder in pending_reorders %}
+                <li>
+                    <a href="{{ url_for('reorder.detail', reorder_id=reorder.id) }}">
+                        Reorder #{{ reorder.id }} - {{ reorder.generated_date.strftime('%Y-%m-%d') }}
+                        ({{ reorder.items|length }} items)
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No pending reorders.</p>
+        {% endif %}
+        <a href="{{ url_for('reorder.list') }}" class="btn btn-primary">View All Reorders</a>
+    </div>
+</div>
+
+<div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+        <a href="{{ url_for('inventory.add') }}" class="btn btn-primary">Add Item</a>
+        <a href="{{ url_for('inventory.list') }}" class="btn btn-secondary">View Inventory</a>
+        <a href="{{ url_for('reorder.generate') }}" class="btn btn-secondary" 
+           onclick="return confirm('Generate new reorder list?');">Generate Reorder</a>
+        <a href="{{ url_for('notification.list') }}" class="btn btn-secondary">View Notifications</a>
+    </div>
+</div>
+{% endblock %}

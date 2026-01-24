@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Reorders - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Reorder Management</h1>
+    <form method="POST" action="{{ url_for('reorder.generate') }}" style="display: inline;">
+        <button type="submit" class="btn btn-primary" 
+                onclick="return confirm('Generate new reorder list?');">Generate Reorder</button>
+    </form>
+</div>
+
+<div class="reorder-table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Reorder ID</th>
+                <th>Generated Date</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Confirmed By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reorder in reorders %}
+            <tr>
+                <td>#{{ reorder.id }}</td>
+                <td>{{ reorder.generated_date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <span class="badge badge-{{ 'success' if reorder.status == 'CONFIRMED' else 'warning' if reorder.status == 'PENDING' else 'danger' }}">
+                        {{ reorder.status }}
+                    </span>
+                </td>
+                <td>{{ reorder.items|length }} items</td>
+                <td>{{ reorder.confirmed_by_user.username if reorder.confirmed_by_user else 'N/A' }}</td>
+                <td>
+                    <a href="{{ url_for('reorder.detail', reorder_id=reorder.id) }}" 
+                       class="btn btn-sm btn-primary">View</a>
+                    {% if reorder.status == 'PENDING' %}
+                        <form method="POST" action="{{ url_for('reorder.confirm', reorder_id=reorder.id) }}" 
+                              style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-success" 
+                                    onclick="return confirm('Confirm this reorder?');">Confirm</button>
+                        </form>
+                        <form method="POST" action="{{ url_for('reorder.cancel', reorder_id=reorder.id) }}" 
+                              style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-danger" 
+                                    onclick="return confirm('Cancel this reorder?');">Cancel</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No reorders found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

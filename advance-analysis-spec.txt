@@ -1,0 +1,741 @@
+
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+developed in a
+professional
+manner.
+Demonstrates the
+use of a code
+checker.
+Implementation is
+completely in-line
+with the design
+documentation
+(including
+automation choices)
+(including
+automation
+choices)
+documentation
+(including
+automation
+choices)
+Design
+documentati
+on
+Design
+documentation
+written to a
+professional
+standard.
+Documentation that
+leaves very little
+ambiguous
+Diagrams are well
+laid out and shows
+skill in
+draughtsmanship
+and presentation of
+the idea.
+The architectural
+Architecture UML
+diagram(s), all
+completed to a good
+standard and
+explained to an
+adequate standard.
+Some unnecessary
+detail may be
+present, but the key
+Architecture
+diagram(s)
+attempted, but
+may have been
+completed to a
+basic standard or
+there is an
+excessive amount
+of unnecessary
+detail present.
+Architecture
+diagram(s)
+present, but
+missing large
+aspects of the
+system on.
+Diagram may
+have been
+mislabelled or
+deviate
+Architecture
+diagram(s)
+significantly
+lacking.
+Very limited
+notes on Design
+pattern(s).
+No presentation
+nor justification
+of where
+No diagram
+worthy of credit
+provided.
+No architectural
+design
+explanation
+attempted.
+No mention of
+10
+%
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+design pattern(s)
+used is/are
+explained in full
+detail and well
+justified. Also
+included is a brief
+description of a
+possible alternative
+pattern and why it
+was not used.
+Excellent and clear
+presentation of
+where anything
+automatically
+generated has been
+used (with critical
+evaluation and
+justification).
+elements are
+focused on.
+All diagram’s
+purpose is.
+The architectural
+design pattern(s)
+used is/are
+explained in good
+detail. Some
+justification may be
+present.
+Clear presentation
+of where anything
+automatically
+generated has been
+used (with some
+critical evaluation
+and justification).
+Naming of
+objects may not
+follow any
+particular
+convention
+An appropriate
+architectural
+design pattern(s)
+explained with
+some detail, but
+with limited
+justification.
+Some limited
+presentation of
+where anything
+automatically
+generated has
+been used (very
+limited
+justification and
+critical
+evaluation).
+significantly
+from the UML
+standard.
+Poor layout
+with difficult to
+follow
+dependency
+flow.
+Architectural
+design
+pattern(s)
+explained in
+very little detail,
+no justification
+given.
+Very limited
+presentation of
+where anything
+automatically
+generated has
+been used
+(without
+justification nor
+critical
+anything
+automatically
+generated has
+been used.
+Design
+pattern(s).
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+User help
+document
+User help
+documentation
+written to a
+professional
+standard.
+As for Upper Second
+plus;
+Evidence of testing
+of the
+documentation to
+confirm it is useful.
+A thoughtful, helpful
+and clear document
+that could aid all the
+relevant users.
+The user help
+document is
+mostly clear, but
+may be missing
+some parts
+and/or
+ambiguous in
+some areas.
+User
+documentation
+very basic
+User
+documentation
+very unclear or
+largely
+incomplete
+User
+documentation
+not present or
+entirely
+unhelpful
+5%
+Testing As for first plus;
+Test
+documentation
+demonstrates
+an innovative
+structure and
+presentation
+balancing being
+as concise as
+possible while
+still being as
+prescriptive as
+necessary
+As for Upper Second
+plus;
+Evidence that the
+tests follow standard
+practice of test case
+design (e.g. partition
+testing, path testing
+etc.)
+Evidence of
+performing all the
+relevant different
+types of testing
+(unit, integration,
+performance etc.)
+Comprehensive test
+plan, which
+evaluates the
+functionality and
+performance of
+most of the
+application.
+Evidence of
+performing the
+relevant different
+types of testing
+(unit, integration,
+performance etc.)
+although some
+The test plan
+covers most of
+the functional
+requirements.
+Evidence of
+reasonable test
+execution, but
+limited summary
+of what
+functionality
+passes and fails.
+Limited evidence
+of performing the
+relevant different
+types of testing
+The test plan
+covers a few of
+the functional
+requirements.
+Weak evidence
+of test
+execution.
+No attempt to
+summarize
+Very limited
+evidence of
+having
+tested/validate
+d anything
+Some attempt at
+a test plan.
+Some attempt at
+test execution
+No evidence of
+having
+tested/validated
+anything
+automatically
+generated
+No screenshots
+nor manually
+written test
+Not a coherent
+test plan or test
+plan absent.
+Test execution
+evidence is
+absent or hard
+to understand.
+10
+%
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+with justification for
+any omissions.
+Evidence of some
+useful test
+automation.
+Evidence of linking
+tests to acceptance
+tests from the
+requirements
+documentation.
+Excellent and clear
+evidence of having
+tested/validated
+anything
+automatically
+generated
+Screenshots have
+been presented very
+effectively to show
+the actual testing
+environment and/or
+results.
+relevant test types
+may be missing.
+Strong evidence of
+test execution and
+documentation,
+including a summary
+of what functionality
+passes and fails.
+Clear evidence of
+having
+tested/validated
+anything
+automatically
+generated
+Screenshots have
+been presented
+effectively to show
+the actual testing
+environment and/or
+results.
+(unit, integration,
+performance etc.)
+Some evidence of
+having
+tested/validated
+anything
+automatically
+generated
+Limited use of
+screenshots to
+show the actual
+testing
+environment
+and/or results.
+automatically
+generated
+No screenshots
+have been
+presented, but
+there is some
+very limited
+evidence to
+show that
+testing has
+been carried
+out
+tables are
+presented.
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+Individually
+written
+evaluation
+and code
+review
+As for first plus;
+Code review
+written to a
+professional
+standard.
+As for Upper second
+plus;
+Code review written
+to an excellent
+standard.
+Quality attributes all
+discussed critically in
+detail.
+How the system
+meets quality
+attributes in ISO
+9126 (or later
+version) is discussed.
+Evidence and
+examples are given
+to support this.
+Each quality
+attribute is
+mentioned.
+Potential
+improvements have
+been detailed in the
+weakest areas.
+Most of the
+quality attributes
+in ISO 9126 (or
+later version) are
+mentioned. Some
+aspects of the
+system given may
+be a loose fit for
+some of the
+attributes.
+Some aspects of
+the system that
+could be
+improved are
+mentioned,
+including why
+these would be
+useful
+Only some of
+the attributes in
+ISO 9126 (or
+later version)
+are mentioned,
+or not
+described in
+much detail at
+all.
+No quality
+attribute in ISO
+9126 (or later
+version) is
+mentioned.
+Evaluation
+limited.
+No aspect of the
+system
+meaningfully
+evaluated.
+5%
+COMP30121 – Advanced Analysis and Design
+Class/
+Grade
+Assessment
+Criteria
+Exceptional
+First
+(includes all
+features of First
+Class with the
+additional
+characteristics
+listed below)
+First
+Low | Mid | High
+Upper Second
+Low | Mid | High
+Lower Second
+Low | Mid | High
+Third
+Low | Mid |
+High
+Marginal Fail Fail
+Low | Mid %
+Individual
+Retrospective
+Insightful and
+unbiased (covers
+both positive and
+negative aspects)
+analysis of the entire
+project.
+Clear, specific
+examples of how it
+may be approached
+differently next
+time.
+Excellent
+presentation and
+organisation to aid
+understanding and
+convey the content.
+Detailed honest
+analysis of
+techniques used in
+the requirements
+gathering process
+that were effective.
+Not all areas
+covered.
+Could include some
+techniques that
+could be used next
+time to gain
+requirements that
+are more detailed.
+A more
+descriptive than
+analytical
+retrospective on
+the requirements
+gathering
+process.
+Less attention
+given to what
+could have been
+done better next
+time.
+Limited
+retrospective
+that covers only
+what went well
+in little detail.
+Retrospective
+very limited and
+does not provide
+any useful
+information for
+next time.
+No retrospective
+present
+5%
+Additional comments:
+COMP30121 – Advanced Analysis and Design
+34
+III. Feedback Opportunities
+Formative (Whilst you’re working on the coursework)
+In addition to the seminar/lectures that cover the assignment when it is set, you may
+contact members of the module team to discuss your approach to the coursework as
+required. The first submission of the coursework is for the purposes of formative feedback
+only. You will receive feedback from the lab/seminar tutor immediately when presenting
+your work as part of the demonstration the week after this first submission.
+Formative Feedback Submission (14.30pm 14th November 2025)
+Each group should think of itself as a start-up software house developing a solution for a
+customer. The customer has allowed discovery meetings to allow you to gather
+requirements. Your start-up team has to submit its Software Requirements Specification
+document.
+You will have access to a scenario document that describes the problem that the customer
+needs to be addressed, and the lab tutor will act as a broker in this project who understands
+what the customer needs – should you have further questions.
+The software requirements specification where the individual requirements conform to the
+needs of being unambiguous, testable, clear etc. as will be covered in taught module.
+There are no word or page limits, so include all the details you need to. Also note
+that being concise whilst delivering the necessary content is a skill. So do not simply
+“pad out” your reports with superfluous content: say what you need to clearly and
+concisely.
+Each group must submit their report in one file (MS WORD) to the group dropbox.
+The week after submission during the labs/seminars, all group members will be required to
+demonstrate (show and talk through) the content of the report to the lab tutor for
+immediate formative feedback.
+The report should contain the following sections (only sections 1 to 6 of the coursework
+template) and it must include a completed contributions section, this is compulsory and
+can be found in Appendix A of the coursework template on NOW.:
+1. Introduction
+a. Purpose
+b. User Characteristics
+c. Assumptions
+d. Scope and Constraints
+e. Glossary of terms
+f. Overview
+2. Functional Requirements
+35
+3. Non-Functional requirements
+a. Usability requirements
+b. Reliability requirements
+c. Performance requirements
+4. Interfaces
+a. User interfaces
+b. Hardware interfaces
+c. Software interfaces
+5. Use Case models
+a. Use Cases
+b. Misuse cases
+6. Project Plan
+Appendix A: Contributions
+A template for the above structure providing further details of what each section should
+contain is available on NOW in the assessment area.
+The contributions section will be used by the markers to modify, as required, your individual
+grade for the coursework. For example, a low contribution will lead to a lower grade.
+Summative (After you’ve submitted the coursework)
+You will receive specific written feedback together with your awarded grade when it is
+returned to you via NOW Dropbox. Feedback provided with your coursework is for
+developmental purposes so that you can improve for the next assessment or subject-related
+module.
+IV. Referencing Styles
+General Reference guidance
+Referencing in the style of Harvard
+Referencing of GenAI Then click on Quick start to Harvard referencing and look at the
+bottom of the list.
+A guide to planning your time is here and a range of study skills can be found here
+Remember to use Outlook or physical calendars to block out time between lectures and labs to
+work on this coursework.
+V. Moderation
+The Moderation Process
+All assessments are subject to a two-stage moderation process. Firstly, any details related to
+the assessment (e.g. clarity of information and the assessment criteria) are considered by an
+independent person (usually a member of the module team). Secondly, the grades awarded
+are considered by the module team to check for consistency and fairness across the cohort for
+the piece of work submitted.
+36
+VI. Aspects for Professional Development
+Professional Practice
+In this module, we have focused on two key learning objectives
+which are listed as follows:
+ Understand more about the demands of a professional work
+context and possible scenarios
+ Learn how constraints and requirements affect working
+practice (quality, time, cost, commercial considerations,
+materials and documentation standards etc.)
+The reports cover examples of: Writing a scientific-style report; Researching existing
+literature; Referencing appropriately; Construction and proper labelling of figures; Critical
+evaluation of methods.
+Many of these are useful transferable skills for employment applications

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Notifications</h1>
+    <form method="POST" action="{{ url_for('notification.mark_all_read') }}" style="display: inline;">
+        <button type="submit" class="btn btn-secondary">Mark All as Read</button>
+    </form>
+</div>
+
+<div class="notifications-list">
+    {% if notifications %}
+        {% for notification in notifications %}
+        <div class="notification-item {% if not notification.read %}unread{% endif %}">
+            <div class="notification-header">
+                <span class="notification-type badge badge-{{ 'warning' if notification.type == 'EXPIRY_WARNING' else 'danger' if notification.type == 'LOW_STOCK' else 'info' }}">
+                    {{ notification.type.replace('_', ' ') }}
+                </span>
+                <span class="notification-time">{{ notification.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                {% if not notification.read %}
+                    <form method="POST" action="{{ url_for('notification.mark_read', notification_id=notification.id) }}" 
+                          style="display: inline;">
+                        <button type="submit" class="btn btn-sm btn-secondary">Mark as Read</button>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="notification-message">{{ notification.message }}</div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No notifications.</p>
+    {% endif %}
+</div>
+{% endblock %}

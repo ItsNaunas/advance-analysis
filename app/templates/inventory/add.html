@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Add Item - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Add Inventory Item</h1>
+    <a href="{{ url_for('inventory.list') }}" class="btn btn-secondary">Back to Inventory</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('inventory.add') }}" class="form">
+        <div class="form-group">
+            <label for="item_name">Item Name *</label>
+            <input type="text" id="item_name" name="item_name" required 
+                   placeholder="e.g., Chicken Breast">
+        </div>
+        
+        <div class="form-group">
+            <label for="quantity">Quantity *</label>
+            <input type="number" id="quantity" name="quantity" min="0" required 
+                   value="1" placeholder="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="supplier_id">Supplier</label>
+            <select id="supplier_id" name="supplier_id">
+                <option value="">Select Supplier (Optional)</option>
+                {% for supplier in suppliers %}
+                    <option value="{{ supplier.id }}">{{ supplier.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="date_added">Date Added</label>
+            <input type="date" id="date_added" name="date_added">
+        </div>
+        
+        <div class="form-group">
+            <label for="expiration_date">Expiration Date</label>
+            <input type="date" id="expiration_date" name="expiration_date" 
+                   placeholder="YYYY-MM-DD">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Item</button>
+            <a href="{{ url_for('inventory.list') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Set today's date as default for date_added
+    document.getElementById('date_added').value = new Date().toISOString().split('T')[0];
+</script>
+{% endblock %}
