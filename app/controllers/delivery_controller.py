@@ -93,6 +93,66 @@ def request_access():
     })
 
 
+@delivery_bp.route('/new', methods=['GET'])
+@login_required
+@require_role(User.ROLE_DELIVERY_PERSON)
+def new():
+    """Display form to create new delivery"""
+    return render_template('delivery/new_delivery.html')
+
+
+@delivery_bp.route('/submit', methods=['POST'])
+@login_required
+@require_role(User.ROLE_DELIVERY_PERSON)
+def submit():
+    """Submit a new delivery"""
+    try:
+        # Get items from form
+        items_data = request.get_json()
+        items = items_data.get('items', [])
+        
+        if not items:
+            return jsonify({
+                'success': False,
+                'message': 'No items provided'
+            }), 400
+        
+        # Create new delivery with auto-populated fields
+        delivery = Delivery(
+            delivery_person_id=current_user.id,  # Auto-add delivery person
+            scheduled_date=date.today(),          # Auto-add date
+            status=Delivery.STATUS_SCHEDULED,
+            items=items
+        )
+        
+        db.session.add(delivery)
+        db.session.commit()
+        
+        # Log the action
+        AuditLog.log_action(
+            current_user.id,
+            'DELIVERY_SUBMITTED',
+            'DELIVERY',
+            delivery.id,
+            {'items_count': len(items)}
+        )
+        
+        return jsonify({
+            'success': True,
+            'message': 'Delivery submitted successfully',
+            'delivery_id': delivery.id,  # Auto-generated delivery ID
+            'delivery_person': current_user.username,
+            'date': delivery.created_at.isoformat()
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'message': f'Error submitting delivery: {str(e)}'
+        }), 500
+
+
 @delivery_bp.route('/api', methods=['GET'])
 @login_required
 @require_role(User.ROLE_DELIVERY_PERSON, User.ROLE_HEAD_CHEF, User.ROLE_ADMIN)

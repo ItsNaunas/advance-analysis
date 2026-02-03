@@ -64,6 +64,54 @@ def sample_head_chef(app):
 
 
 @pytest.fixture
+def sample_chef(app):
+    """Create sample chef for testing"""
+    with app.app_context():
+        user = User(
+            username='chef',
+            email='chef@example.com',
+            password_hash=hash_password('password123'),
+            role=User.ROLE_CHEF
+        )
+        db.session.add(user)
+        db.session.commit()
+        user_id = user.id
+        username = user.username
+        
+    # Return a simple object with the data we need
+    class UserData:
+        def __init__(self, id, username):
+            self.id = id
+            self.username = username
+            
+    return UserData(user_id, username)
+
+
+@pytest.fixture
+def sample_delivery_person(app):
+    """Create sample delivery person for testing"""
+    with app.app_context():
+        user = User(
+            username='delivery1',
+            email='delivery@example.com',
+            password_hash=hash_password('password123'),
+            role=User.ROLE_DELIVERY_PERSON
+        )
+        db.session.add(user)
+        db.session.commit()
+        user_id = user.id
+        username = user.username
+        
+    # Return a simple object with the data we need
+    class UserData:
+        def __init__(self, id, username):
+            self.id = id
+            self.username = username
+            
+    return UserData(user_id, username)
+
+
+@pytest.fixture
 def sample_supplier(app):
     """Create sample supplier for testing"""
     with app.app_context():
