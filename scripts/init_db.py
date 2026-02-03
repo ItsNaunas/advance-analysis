@@ -49,6 +49,17 @@ def init_database():
             Supplier(name='Quality Meats Ltd.', contact_info='orders@qualitymeats.com'),
             Supplier(name='Garden Vegetables Inc.', contact_info='sales@gardenveg.com'),
             Supplier(name='Dairy Products LLC', contact_info='info@dairyproducts.com'),
+            Supplier(name='Ocean Fresh Seafood', contact_info='orders@oceanfresh.com'),
+            Supplier(name='Golden Grain Suppliers', contact_info='sales@goldengrain.com'),
+            Supplier(name='Spice World Imports', contact_info='info@spiceworld.com'),
+            Supplier(name='Premium Poultry Farm', contact_info='contact@premiumpoultry.com'),
+            Supplier(name='Organic Produce Market', contact_info='orders@organicproduce.com'),
+            Supplier(name='Bakery Essentials Supply', contact_info='sales@bakeryessentials.com'),
+            Supplier(name='Fine Wines & Spirits', contact_info='info@finewines.com'),
+            Supplier(name='Gourmet Oils & Sauces', contact_info='contact@gourmetoils.com'),
+            Supplier(name='Local Farm Fresh', contact_info='orders@localfarmfresh.com'),
+            Supplier(name='International Foods Distributor', contact_info='sales@intlfoodsdist.com'),
+            Supplier(name='Frozen Foods Depot', contact_info='orders@frozendepot.com'),
         ]
         
         for supplier in suppliers:
