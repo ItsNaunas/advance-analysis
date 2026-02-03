@@ -60,6 +60,109 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
+## Full Domain Model (Mermaid)
+
+```mermaid
+classDiagram
+class User {
+  +Integer id
+  +String username
+  +String email
+  +String password_hash
+  +String role
+  +DateTime created_at
+  +DateTime last_login
+  +Integer failed_login_attempts
+  +DateTime locked_until
+  +is_locked(): Boolean
+  +has_role(role): Boolean
+  +is_head_chef(): Boolean
+  +is_admin(): Boolean
+  +can_manage_users(): Boolean
+  +can_view_reports(): Boolean
+}
+
+class Inventory {
+  +Integer id
+  +String item_name
+  +Integer quantity
+  +Integer? supplier_id
+  +Date date_added
+  +Date? expiration_date
+  +Integer? created_by
+  +DateTime created_at
+  +is_expiring_soon(days): Boolean
+  +is_expired(): Boolean
+  +is_low_stock(threshold_days): Boolean
+  +to_dict(): Dictionary
+}
+
+class Supplier {
+  +Integer id
+  +String name
+  +Text contact_info
+  +DateTime created_at
+  +to_dict(): Dictionary
+}
+
+class Delivery {
+  +Integer id
+  +Integer? delivery_person_id
+  +Date? scheduled_date
+  +String status
+  +Text? items_json
+  +DateTime created_at
+  +DateTime? completed_at
+  +items: List
+  +to_dict(): Dictionary
+}
+
+class Notification {
+  +Integer id
+  +Integer user_id
+  +String type
+  +Text message
+  +Boolean read
+  +DateTime created_at
+  +mark_as_read(): void
+  +to_dict(): Dictionary
+}
+
+class Reorder {
+  +Integer id
+  +Date generated_date
+  +String status
+  +Text items_json
+  +Integer? confirmed_by
+  +DateTime? confirmed_at
+  +DateTime created_at
+  +items: List
+  +confirm(user_id): void
+  +cancel(): void
+  +to_dict(): Dictionary
+}
+
+class AuditLog {
+  +Integer id
+  +Integer? user_id
+  +String action
+  +String entity_type
+  +Integer? entity_id
+  +Text? details
+  +DateTime timestamp
+  +details_dict: Dictionary
+  +to_dict(): Dictionary
+  +log_action(user_id, action, entity_type, entity_id, details): AuditLog
+}
+
+Inventory "0..*" --> "0..1" Supplier : supplier
+Inventory "0..*" --> "0..1" User : created_by
+Delivery "0..*" --> "0..1" User : delivery_person
+Notification "0..*" --> "1" User : user
+AuditLog "0..*" --> "0..1" User : user
+Reorder "0..*" --> "0..1" User : confirmed_by
+```
+
 ## Service Layer
 
 ```
