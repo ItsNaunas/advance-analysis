@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}New Delivery - FFSmart{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>New Delivery</h1>
+    <a href="{{ url_for('dashboard.index') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+
+<div class="form-container">
+    <form id="deliveryForm">
+        <h2>Add Delivery Items</h2>
+        
+        <div id="items-container">
+            <div class="item-row" data-index="0">
+                <div class="form-group">
+                    <label>Item Name</label>
+                    <input type="text" class="item-name" placeholder="e.g., Tomatoes" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" class="item-quantity" min="1" placeholder="e.g., 10" required>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm remove-item" style="display: none;">Remove</button>
+            </div>
+        </div>
+        
+        <button type="button" id="addItemBtn" class="btn btn-secondary">+ Add Another Item</button>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Submit Delivery</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-group input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+#addItemBtn {
+    margin-top: 1rem;
+}
+
+.remove-item {
+    align-self: flex-end;
+    margin-bottom: 0.2rem;
+}
+</style>
+
+<script>
+let itemIndex = 1;
+
+document.getElementById('addItemBtn').addEventListener('click', function() {
+    const container = document.getElementById('items-container');
+    const newRow = document.createElement('div');
+    newRow.className = 'item-row';
+    newRow.setAttribute('data-index', itemIndex);
+    newRow.innerHTML = `
+        <div class="form-group">
+            <label>Item Name</label>
+            <input type="text" class="item-name" placeholder="e.g., Tomatoes" required>
+        </div>
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" class="item-quantity" min="1" placeholder="e.g., 10" required>
+        </div>
+        <button type="button" class="btn btn-danger btn-sm remove-item">Remove</button>
+    `;
+    
+    container.appendChild(newRow);
+    itemIndex++;
+    
+    // Show remove buttons if more than 1 item
+    updateRemoveButtons();
+});
+
+// Event delegation for remove buttons
+document.getElementById('items-container').addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-item')) {
+        e.target.closest('.item-row').remove();
+        updateRemoveButtons();
+    }
+});
+
+function updateRemoveButtons() {
+    const rows = document.querySelectorAll('.item-row');
+    rows.forEach((row, index) => {
+        const removeBtn = row.querySelector('.remove-item');
+        if (rows.length > 1) {
+            removeBtn.style.display = 'block';
+        } else {
+            removeBtn.style.display = 'none';
+        }
+    });
+}
+
+document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect all items
+    const items = [];
+    const itemRows = document.querySelectorAll('.item-row');
+    
+    itemRows.forEach(row => {
+        const itemName = row.querySelector('.item-name').value.trim();
+        const quantity = row.querySelector('.item-quantity').value;
+        
+        if (itemName && quantity) {
+            items.push({
+                item_name: itemName,
+                quantity: parseInt(quantity)
+            });
+        }
+    });
+    
+    if (items.length === 0) {
+        alert('Please add at least one item');
+        return;
+    }
+    
+    // Submit delivery
+    fetch('{{ url_for("delivery.submit") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: items })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(`Delivery submitted successfully!\n\nDelivery ID: ${data.delivery_id}\nDelivery Person: ${data.delivery_person}\nDate/Time: ${new Date(data.date).toLocaleString()}`);
+            window.location.href = '{{ url_for("dashboard.index") }}';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting delivery. Please try again.');
+    });
+});
+</script>
+{% endblock %}
